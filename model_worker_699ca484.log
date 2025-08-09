@@ -1,0 +1,31 @@
+2025-03-19 11:02:33 | INFO | model_worker | args: Namespace(host='localhost', port=31000, worker_address='http://localhost:31000', controller_address='http://localhost:21001', model_path='/Volumes/PSSD/models/Qwen/Qwen-1_8B-Chat-Int8', revision='main', device='cuda', gpus=None, num_gpus=1, max_gpu_memory=None, dtype=None, load_8bit=False, cpu_offloading=False, gptq_ckpt=None, gptq_wbits=16, gptq_groupsize=-1, gptq_act_order=False, awq_ckpt=None, awq_wbits=16, awq_groupsize=-1, enable_exllama=False, exllama_max_seq_len=4096, exllama_gpu_split=None, exllama_cache_8bit=False, enable_xft=False, xft_max_seq_len=4096, xft_dtype=None, model_names=None, conv_template=None, embed_in_truncate=False, limit_worker_concurrency=5, stream_interval=2, no_register=False, seed=None, debug=False, ssl=False)
+2025-03-19 11:02:33 | INFO | model_worker | Loading the model ['Qwen-1_8B-Chat-Int8'] on worker 699ca484 ...
+2025-03-19 11:02:33 | ERROR | stderr | Traceback (most recent call last):
+2025-03-19 11:02:33 | ERROR | stderr |   File "<frozen runpy>", line 198, in _run_module_as_main
+2025-03-19 11:02:33 | ERROR | stderr |   File "<frozen runpy>", line 88, in _run_code
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 414, in <module>
+2025-03-19 11:02:33 | ERROR | stderr |     args, worker = create_model_worker()
+2025-03-19 11:02:33 | ERROR | stderr |                    ^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 385, in create_model_worker
+2025-03-19 11:02:33 | ERROR | stderr |     worker = ModelWorker(
+2025-03-19 11:02:33 | ERROR | stderr |              ^^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 77, in __init__
+2025-03-19 11:02:33 | ERROR | stderr |     self.model, self.tokenizer = load_model(
+2025-03-19 11:02:33 | ERROR | stderr |                                  ^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/model/model_adapter.py", line 353, in load_model
+2025-03-19 11:02:33 | ERROR | stderr |     model, tokenizer = adapter.load_model(model_path, kwargs)
+2025-03-19 11:02:33 | ERROR | stderr |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/model/model_adapter.py", line 1697, in load_model
+2025-03-19 11:02:33 | ERROR | stderr |     model = AutoModelForCausalLM.from_pretrained(
+2025-03-19 11:02:33 | ERROR | stderr |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 559, in from_pretrained
+2025-03-19 11:02:33 | ERROR | stderr |     return model_class.from_pretrained(
+2025-03-19 11:02:33 | ERROR | stderr |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/modeling_utils.py", line 262, in _wrapper
+2025-03-19 11:02:33 | ERROR | stderr |     return func(*args, **kwargs)
+2025-03-19 11:02:33 | ERROR | stderr |            ^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:02:33 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/modeling_utils.py", line 3698, in from_pretrained
+2025-03-19 11:02:34 | ERROR | stderr |     hf_quantizer.validate_environment(
+2025-03-19 11:02:34 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/quantizers/quantizer_gptq.py", line 65, in validate_environment
+2025-03-19 11:02:34 | ERROR | stderr |     raise RuntimeError("GPU is required to quantize or run quantize model.")
+2025-03-19 11:02:34 | ERROR | stderr | RuntimeError: GPU is required to quantize or run quantize model.

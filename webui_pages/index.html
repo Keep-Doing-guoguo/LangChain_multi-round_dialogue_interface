@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ByMyself1 - 问答系统</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f6f8;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: #2c3e50;
+      color: white;
+      padding: 18px 24px;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: 500;
+    }
+    .chat-box {
+      height: 60vh;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #fcfcfc;
+    }
+    .message {
+      padding: 12px 18px;
+      border-radius: 10px;
+      max-width: 80%;
+      line-height: 1.6;
+      word-wrap: break-word;
+      position: relative;
+      font-size: 1em;
+    }
+    .user {
+      align-self: flex-end;
+      background: #d4edff;
+      color: #004085;
+    }
+    .assistant {
+      align-self: flex-start;
+      background: #e9ecef;
+      color: #1f2937;
+    }
+    .message-id {
+      font-size: 0.75em;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .input-area {
+      display: flex;
+      padding: 18px;
+      border-top: 1px solid #e0e0e0;
+      background: white;
+    }
+    #query {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      outline: none;
+    }
+    #query:focus {
+      border-color: #0078d7;
+    }
+    button {
+      margin-left: 12px;
+      padding: 12px 24px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+    }
+    button:hover:not(:disabled) {
+      background: #005a9e;
+    }
+    button:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+    .thinking {
+      font-style: italic;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">ByMyself1 问答系统</div>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="input-area">
+      <input type="text" id="query" placeholder="请输入你的问题，例如：恼羞成怒" autofocus />
+      <button onclick="sendMessage()" id="sendBtn">发送</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const queryInput = document.getElementById("query");
+    const sendBtn = document.getElementById("sendBtn");
+
+    let conversationId = null; // 当前对话 ID
+
+    // 生成 UUID v4
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    // 添加消息（支持 message_id 显示）
+    function addMessage(content, role, messageId = null) {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${role}`;
+
+      const contentDiv = document.createElement("div");
+      contentDiv.textContent = content;
+      msgDiv.appendChild(contentDiv);
+
+      if (messageId) {
+        const idDiv = document.createElement("div");
+        idDiv.className = "message-id";
+        idDiv.textContent = `ID: ${messageId}`;
+        msgDiv.appendChild(idDiv);
+      }
+
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // 发送消息
+    async function sendMessage() {
+      const query = queryInput.value.trim();
+      if (!query) return;
+
+      // 首次发送时生成新 conversation_id
+      if (!conversationId) {
+        conversationId = generateUUID();
+        console.log("新对话 ID:", conversationId);
+      }
+
+      // 显示用户消息
+      addMessage(query, "user");
+
+      // 清空输入框，禁用按钮
+      queryInput.value = "";
+      sendBtn.disabled = true;
+
+      // 显示“思考中”
+      const thinkingDiv = document.createElement("div");
+      thinkingDiv.className = "message assistant thinking";
+      thinkingDiv.id = "thinking";
+      thinkingDiv.innerHTML = "正在思考...";
+      chatBox.appendChild(thinkingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const response = await fetch("http://127.0.0.1:7861/chat/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            "query": query,
+            "conversation_id": conversationId,
+            "history_len": -1,
+            "history": [],
+            "stream": true,
+            "model_name": "qwen-api",
+            "temperature": 0.7,
+            "max_tokens": 0,
+            "prompt_name": "default"
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`请求失败: ${response.status} ${response.statusText}`);
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let answer = "";
+
+        // 处理 SSE 流
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value);
+          const lines = chunk.split("\n").filter(line => line.trim() !== "");
+
+          for (const line of lines) {
+            if (line.startsWith("data:")) {
+              const dataStr = line.slice(5).trim(); // 去掉 "data:"
+              if (dataStr === "[DONE]") continue;
+
+              try {
+                const data = JSON.parse(dataStr);
+                const token = data.text || "";
+                answer += token;
+
+                // 更新助手消息
+                thinkingDiv.textContent = answer;
+              } catch (e) {
+                console.warn("JSON 解析失败:", dataStr);
+              }
+            }
+          }
+        }
+
+        // 完成后移除 "思考中" 样式
+        thinkingDiv.className = "message assistant";
+        thinkingDiv.id = "";
+
+      } catch (error) {
+        thinkingDiv.textContent = "❌ 请求出错：" + error.message;
+        thinkingDiv.className = "message assistant";
+      } finally {
+        sendBtn.disabled = false;
+        queryInput.focus();
+      }
+    }
+
+    // 回车发送
+    queryInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+
+    // 初始化提示
+    window.onload = () => {
+      addMessage("你好！我是 ByMyself1 问答系统，支持流式输出。请输入你的问题。", "assistant");
+    };
+  </script>
+</body>
+</html>

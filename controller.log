@@ -1,0 +1,30 @@
+2025-03-19 10:59:51 | INFO | controller | args: Namespace(host='0.0.0.0', port=21001, dispatch_method='shortest_queue', ssl=False)
+2025-03-19 10:59:51 | ERROR | stderr | [32mINFO[0m:     Started server process [[36m66429[0m]
+2025-03-19 10:59:51 | ERROR | stderr | [32mINFO[0m:     Waiting for application startup.
+2025-03-19 10:59:51 | ERROR | stderr | [32mINFO[0m:     Application startup complete.
+2025-03-19 10:59:51 | ERROR | stderr | [32mINFO[0m:     Uvicorn running on [1mhttp://0.0.0.0:21001[0m (Press CTRL+C to quit)
+2025-03-19 11:18:59 | INFO | controller | Register a new worker: http://localhost:31000
+2025-03-19 11:18:59 | INFO | controller | Register done: http://localhost:31000, {'model_names': ['Qwen-1_8B-Chat'], 'speed': 1, 'queue_length': 0}
+2025-03-19 11:18:59 | INFO | stdout | [32mINFO[0m:     127.0.0.1:57932 - "[1mPOST /register_worker HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:19:44 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:19:44 | INFO | stdout | [32mINFO[0m:     127.0.0.1:57943 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:20:29 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:20:29 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58170 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:21:14 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:21:14 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58290 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:21:59 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:21:59 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58311 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:22:45 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:22:45 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58584 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:23:30 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:23:30 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58619 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:24:16 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:24:16 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58643 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:25:01 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:25:01 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58704 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:25:46 | INFO | controller | Receive heart beat. http://localhost:31000
+2025-03-19 11:25:46 | INFO | stdout | [32mINFO[0m:     127.0.0.1:58793 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2025-03-19 11:26:26 | ERROR | stderr | [32mINFO[0m:     Shutting down
+2025-03-19 11:26:26 | ERROR | stderr | [32mINFO[0m:     Waiting for application shutdown.
+2025-03-19 11:26:26 | ERROR | stderr | [32mINFO[0m:     Application shutdown complete.
+2025-03-19 11:26:26 | ERROR | stderr | [32mINFO[0m:     Finished server process [[36m66429[0m]

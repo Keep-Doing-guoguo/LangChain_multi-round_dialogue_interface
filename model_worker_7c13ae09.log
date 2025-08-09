@@ -1,0 +1,37 @@
+2025-03-19 11:14:35 | INFO | model_worker | args: Namespace(host='localhost', port=31000, worker_address='http://localhost:31000', controller_address='http://localhost:21001', model_path='/Volumes/PSSD/models/Qwen/Qwen-1_8B-Chat', revision='main', device='cuda', gpus=None, num_gpus=1, max_gpu_memory=None, dtype=None, load_8bit=False, cpu_offloading=False, gptq_ckpt=None, gptq_wbits=16, gptq_groupsize=-1, gptq_act_order=False, awq_ckpt=None, awq_wbits=16, awq_groupsize=-1, enable_exllama=False, exllama_max_seq_len=4096, exllama_gpu_split=None, exllama_cache_8bit=False, enable_xft=False, xft_max_seq_len=4096, xft_dtype=None, model_names=None, conv_template=None, embed_in_truncate=False, limit_worker_concurrency=5, stream_interval=2, no_register=False, seed=None, debug=False, ssl=False)
+2025-03-19 11:14:35 | INFO | model_worker | Loading the model ['Qwen-1_8B-Chat'] on worker 7c13ae09 ...
+2025-03-19 11:14:35 | ERROR | stderr | Loading checkpoint shards:   0%|                                                                                                                 | 0/2 [00:00<?, ?it/s]
+2025-03-19 11:14:50 | ERROR | stderr | Loading checkpoint shards:  50%|████████████████████████████████████████████████████▌                                                    | 1/2 [00:14<00:14, 14.83s/it]
+2025-03-19 11:15:03 | ERROR | stderr | Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:27<00:00, 13.74s/it]
+2025-03-19 11:15:03 | ERROR | stderr | Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:27<00:00, 13.91s/it]
+2025-03-19 11:15:03 | ERROR | stderr | 
+2025-03-19 11:15:03 | ERROR | stderr | Traceback (most recent call last):
+2025-03-19 11:15:03 | ERROR | stderr |   File "<frozen runpy>", line 198, in _run_module_as_main
+2025-03-19 11:15:03 | ERROR | stderr |   File "<frozen runpy>", line 88, in _run_code
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 414, in <module>
+2025-03-19 11:15:03 | ERROR | stderr |     args, worker = create_model_worker()
+2025-03-19 11:15:03 | ERROR | stderr |                    ^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 385, in create_model_worker
+2025-03-19 11:15:03 | ERROR | stderr |     worker = ModelWorker(
+2025-03-19 11:15:03 | ERROR | stderr |              ^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 77, in __init__
+2025-03-19 11:15:03 | ERROR | stderr |     self.model, self.tokenizer = load_model(
+2025-03-19 11:15:03 | ERROR | stderr |                                  ^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/model/model_adapter.py", line 353, in load_model
+2025-03-19 11:15:03 | ERROR | stderr |     model, tokenizer = adapter.load_model(model_path, kwargs)
+2025-03-19 11:15:03 | ERROR | stderr |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/model/model_adapter.py", line 1706, in load_model
+2025-03-19 11:15:03 | ERROR | stderr |     tokenizer = AutoTokenizer.from_pretrained(
+2025-03-19 11:15:03 | ERROR | stderr |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py", line 925, in from_pretrained
+2025-03-19 11:15:03 | ERROR | stderr |     tokenizer_class = get_class_from_dynamic_module(class_ref, pretrained_model_name_or_path, **kwargs)
+2025-03-19 11:15:03 | ERROR | stderr |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/dynamic_module_utils.py", line 541, in get_class_from_dynamic_module
+2025-03-19 11:15:03 | ERROR | stderr |     final_module = get_cached_module_file(
+2025-03-19 11:15:03 | ERROR | stderr |                    ^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/dynamic_module_utils.py", line 366, in get_cached_module_file
+2025-03-19 11:15:03 | ERROR | stderr |     modules_needed = check_imports(resolved_module_file)
+2025-03-19 11:15:03 | ERROR | stderr |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-03-19 11:15:03 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/dynamic_module_utils.py", line 198, in check_imports
+2025-03-19 11:15:03 | ERROR | stderr |     raise ImportError(
+2025-03-19 11:15:03 | ERROR | stderr | ImportError: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
