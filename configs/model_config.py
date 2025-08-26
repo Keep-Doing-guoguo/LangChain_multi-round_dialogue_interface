@@ -21,12 +21,6 @@ RERANKER_MAX_LENGTH = 1024
 EMBEDDING_KEYWORD_FILE = "keywords.txt"
 EMBEDDING_MODEL_OUTPUT_PATH = "output"
 
-# 要运行的 LLM 名称，可以包括本地模型和在线模型。列表中本地模型将在启动项目时全部加载。
-# 列表中第一个模型将作为 API 和 WEBUI 的默认模型。
-# 在这里，我们使用目前主流的两个离线模型，其中，chatglm3-6b 为默认加载模型。
-# 如果你的显存不足，可使用 Qwen-1_8B-Chat, 该模型 FP16 仅需 3.8G显存。
-
-# chatglm3-6b输出角色标签<|user|>及自问自答的问题详见项目wiki->常见问题->Q20.
 
 LLM_MODELS = ["qwen-api", "zhipu-api", "openai-api"]  # "Qwen-1_8B-Chat",
 
@@ -46,77 +40,6 @@ MAX_TOKENS = None
 TEMPERATURE = 0.7
 # TOP_P = 0.95 # ChatOpenAI暂不支持该参数
 
-ONLINE_LLM_MODEL = {
-    # 线上模型。请在server_config中为每个在线API设置不同的端口
-
-    # 阿里云通义千问 API，文档参考 https://help.aliyun.com/zh/dashscope/developer-reference/api-details
-    "qwen-api": {
-        "version": "qwen-turbo",  # 可选包括 "qwen-turbo", "qwen-plus"
-        "api_key": "sk-79fcaf8f7fe24839b4abcbdd9c9e8980",  # 请在阿里云控制台模型服务灵积API-KEY管理页面创建
-        "provider": "QwenWorker",
-        "embed_model": "text-embedding-v1" # embedding 模型名称
-    },
-}
-
-# 在以下字典中修改属性值，以指定本地embedding模型存储位置。支持3种设置方法：
-# 1、将对应的值修改为模型绝对路径
-# 2、不修改此处的值（以 text2vec 为例）：
-#       2.1 如果{MODEL_ROOT_PATH}下存在如下任一子目录：
-#           - text2vec
-#           - GanymedeNil/text2vec-large-chinese
-#           - text2vec-large-chinese
-#       2.2 如果以上本地路径不存在，则使用huggingface模型
-MODEL_PATH = {
-    "embed_model": {
-        "m3e-large": "moka-ai/m3e-large",
-        "bge-small-zh": "BAAI/bge-small-zh",
-        "bge-base-zh": "BAAI/bge-base-zh",
-        "bge-large-zh": "BAAI/bge-large-zh",
-        "bge-large-zh-noinstruct": "BAAI/bge-large-zh-noinstruct",
-        "bge-base-zh-v1.5": "BAAI/bge-base-zh-v1.5",
-        "bge-large-zh-v1.5": "BAAI/bge-large-zh-v1.5",
-
-    },
-
-    "llm_model": {
-        # 以下部分模型并未完全测试，仅根据fastchat和vllm模型的模型列表推定支持
-        "Qwen-1_8B": "Qwen/Qwen-1_8B",
-        "Qwen-1_8B-Chat": "Qwen/Qwen-1_8B-Chat",
-        "Qwen-1_8B-Chat-Int8": "/Volumes/PSSD/models/Qwen/Qwen-1_8B-Chat-Int8",
-        "Qwen-1_8B-Chat-Int4": "Qwen/Qwen-1_8B-Chat-Int4",
-    },
-    "reranker":{
-        "bge-reranker-large":"BAAI/bge-reranker-large",
-        "bge-reranker-base":"BAAI/bge-reranker-base",
-        #TODO 增加在线reranker，如cohere
-    }
-}
-# 通常情况下不需要更改以下内容
-
-# nltk 模型存储路径
-NLTK_DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "nltk_data")
-
-VLLM_MODEL_DICT = {
-
-    "Qwen-1_8B": "Qwen/Qwen-1_8B",
-    "Qwen-1_8B-Chat": "Qwen/Qwen-1_8B-Chat",
-    "Qwen-1_8B-Chat-Int8": "Qwen/Qwen-1_8B-Chat-Int8",
-    "Qwen-1_8B-Chat-Int4": "Qwen/Qwen-1_8B-Chat-Int4",
-
-    "Qwen-7B": "Qwen/Qwen-7B",
-    "Qwen-7B-Chat": "Qwen/Qwen-7B-Chat",
 
 
 
-}
-
-# 你认为支持Agent能力的模型，可以在这里添加，添加后不会出现可视化界面的警告
-# 经过我们测试，原生支持Agent的模型仅有以下几个
-SUPPORT_AGENT_MODEL = [
-    "azure-api",
-    "openai-api",
-    "qwen-api",
-    "Qwen",
-    "chatglm3",
-    "xinghuo-api",
-]

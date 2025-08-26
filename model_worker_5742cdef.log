@@ -1,25 +1,0 @@
-2025-03-19 11:18:23 | INFO | model_worker | args: Namespace(host='localhost', port=31000, worker_address='http://localhost:31000', controller_address='http://localhost:21001', model_path='/Volumes/PSSD/models/Qwen/Qwen-1_8B-Chat', revision='main', device='mps', gpus=None, num_gpus=1, max_gpu_memory=None, dtype=None, load_8bit=False, cpu_offloading=False, gptq_ckpt=None, gptq_wbits=16, gptq_groupsize=-1, gptq_act_order=False, awq_ckpt=None, awq_wbits=16, awq_groupsize=-1, enable_exllama=False, exllama_max_seq_len=4096, exllama_gpu_split=None, exllama_cache_8bit=False, enable_xft=False, xft_max_seq_len=4096, xft_dtype=None, model_names=None, conv_template=None, embed_in_truncate=False, limit_worker_concurrency=5, stream_interval=2, no_register=False, seed=None, debug=False, ssl=False)
-2025-03-19 11:18:23 | INFO | model_worker | Loading the model ['Qwen-1_8B-Chat'] on worker 5742cdef ...
-2025-03-19 11:18:25 | ERROR | stderr | Loading checkpoint shards:   0%|                                                                                                                 | 0/2 [00:00<?, ?it/s]
-2025-03-19 11:18:40 | ERROR | stderr | Loading checkpoint shards:  50%|████████████████████████████████████████████████████▌                                                    | 1/2 [00:15<00:15, 15.71s/it]
-2025-03-19 11:18:57 | ERROR | stderr | Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:32<00:00, 16.13s/it]
-2025-03-19 11:18:57 | ERROR | stderr | Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:32<00:00, 16.07s/it]
-2025-03-19 11:18:57 | ERROR | stderr | 
-2025-03-19 11:18:58 | INFO | model_worker | Register to controller
-2025-03-19 11:18:59 | ERROR | stderr | [32mINFO[0m:     Started server process [[36m67482[0m]
-2025-03-19 11:18:59 | ERROR | stderr | [32mINFO[0m:     Waiting for application startup.
-2025-03-19 11:18:59 | ERROR | stderr | [32mINFO[0m:     Application startup complete.
-2025-03-19 11:18:59 | ERROR | stderr | [32mINFO[0m:     Uvicorn running on [1mhttp://localhost:31000[0m (Press CTRL+C to quit)
-2025-03-19 11:19:44 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:20:29 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:21:14 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:21:59 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:22:44 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:23:30 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:24:15 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:25:01 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:25:46 | INFO | model_worker | Send heart beat. Models: ['Qwen-1_8B-Chat']. Semaphore: None. call_ct: 0. worker_id: 5742cdef. 
-2025-03-19 11:26:25 | ERROR | stderr | [32mINFO[0m:     Shutting down
-2025-03-19 11:26:25 | ERROR | stderr | [32mINFO[0m:     Waiting for application shutdown.
-2025-03-19 11:26:25 | ERROR | stderr | [32mINFO[0m:     Application shutdown complete.
-2025-03-19 11:26:25 | ERROR | stderr | [32mINFO[0m:     Finished server process [[36m67482[0m]

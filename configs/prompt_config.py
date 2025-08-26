@@ -6,23 +6,7 @@
 @date: 2025/4/17 17:34
 @source from: 
 """
-# prompt模板使用Jinja2语法，简单点就是用双大括号代替f-string的单大括号
-# 本配置文件支持热加载，修改prompt模板后无需重启服务。
 
-# LLM对话支持的变量：
-#   - input: 用户输入内容
-
-# 知识库和搜索引擎对话支持的变量：
-#   - context: 从检索结果拼接的知识文本
-#   - question: 用户提出的问题
-
-# Agent对话支持的变量：
-
-#   - tools: 可用的工具列表
-#   - tool_names: 可用的工具名称列表
-#   - history: 用户和Agent的对话历史
-#   - input: 用户输入内容
-#   - agent_scratchpad: Agent的思维记录
 
 PROMPT_TEMPLATES = {
     "llm_chat": {

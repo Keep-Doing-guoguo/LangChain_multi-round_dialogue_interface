@@ -11,7 +11,7 @@ from configs import logger, log_verbose
 from langchain.chat_models import ChatOpenAI
 from langchain.llms import OpenAI, AzureOpenAI, Anthropic
 import os
-os.environ["OPENAI_API_KEY"] = "sk-79fcaf8f7fe24839b4abcbdd9c9e8980"
+os.environ["OPENAI_API_KEY"] = ""
 #fn 一个可等待的任务（如协程函数）。用于在任务完成或出错时通知其他任务或流程。
 async def wrap_done(fn: Awaitable, event: asyncio.Event):#并在任务完成或发生异常时，利用 event 发出信号。这种结构对于控制和管理异步任务的状态非常有用。
     """Wrap an awaitable with a event to signal when it's done or an exception is raised."""
@@ -48,7 +48,7 @@ def get_ChatOpenAI(
         streaming=streaming,
         verbose=verbose,
         callbacks=callbacks,
-        openai_api_key='sk-79fcaf8f7fe24839b4abcbdd9c9e8980',
+        openai_api_key='',
         openai_api_base="https://dashscope.aliyuncs.com/compatible-mode/v1",
         model_name="qwen-plus",
         temperature=0.7,
@@ -60,7 +60,7 @@ def get_OpenAI(
 
 ) -> OpenAI:
     model = OpenAI(
-        openai_api_key="sk-79fcaf8f7fe24839b4abcbdd9c9e8980",
+        openai_api_key="",
         openai_api_base="https://dashscope.aliyuncs.com/compatible-mode/v1",
         model_name="qwen-plus",
     )

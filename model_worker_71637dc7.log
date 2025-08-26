@@ -1,40 +1,0 @@
-2025-03-19 11:15:32 | INFO | model_worker | args: Namespace(host='localhost', port=31000, worker_address='http://localhost:31000', controller_address='http://localhost:21001', model_path='/Volumes/PSSD/models/Qwen/Qwen-1_8B-Chat', revision='main', device='cuda', gpus=None, num_gpus=1, max_gpu_memory=None, dtype=None, load_8bit=False, cpu_offloading=False, gptq_ckpt=None, gptq_wbits=16, gptq_groupsize=-1, gptq_act_order=False, awq_ckpt=None, awq_wbits=16, awq_groupsize=-1, enable_exllama=False, exllama_max_seq_len=4096, exllama_gpu_split=None, exllama_cache_8bit=False, enable_xft=False, xft_max_seq_len=4096, xft_dtype=None, model_names=None, conv_template=None, embed_in_truncate=False, limit_worker_concurrency=5, stream_interval=2, no_register=False, seed=None, debug=False, ssl=False)
-2025-03-19 11:15:32 | INFO | model_worker | Loading the model ['Qwen-1_8B-Chat'] on worker 71637dc7 ...
-2025-03-19 11:15:33 | ERROR | stderr | Loading checkpoint shards:   0%|                                                                                                                 | 0/2 [00:00<?, ?it/s]
-2025-03-19 11:15:46 | ERROR | stderr | Loading checkpoint shards:  50%|████████████████████████████████████████████████████▌                                                    | 1/2 [00:12<00:12, 12.53s/it]
-2025-03-19 11:15:59 | ERROR | stderr | Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:25<00:00, 12.68s/it]
-2025-03-19 11:15:59 | ERROR | stderr | Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:25<00:00, 12.66s/it]
-2025-03-19 11:15:59 | ERROR | stderr | 
-2025-03-19 11:15:59 | ERROR | stderr | Traceback (most recent call last):
-2025-03-19 11:15:59 | ERROR | stderr |   File "<frozen runpy>", line 198, in _run_module_as_main
-2025-03-19 11:15:59 | ERROR | stderr |   File "<frozen runpy>", line 88, in _run_code
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 414, in <module>
-2025-03-19 11:15:59 | ERROR | stderr |     args, worker = create_model_worker()
-2025-03-19 11:15:59 | ERROR | stderr |                    ^^^^^^^^^^^^^^^^^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 385, in create_model_worker
-2025-03-19 11:15:59 | ERROR | stderr |     worker = ModelWorker(
-2025-03-19 11:15:59 | ERROR | stderr |              ^^^^^^^^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/serve/model_worker.py", line 77, in __init__
-2025-03-19 11:15:59 | ERROR | stderr |     self.model, self.tokenizer = load_model(
-2025-03-19 11:15:59 | ERROR | stderr |                                  ^^^^^^^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/fastchat/model/model_adapter.py", line 367, in load_model
-2025-03-19 11:15:59 | ERROR | stderr |     model.to(device)
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/transformers/modeling_utils.py", line 3162, in to
-2025-03-19 11:15:59 | ERROR | stderr |     return super().to(*args, **kwargs)
-2025-03-19 11:15:59 | ERROR | stderr |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1343, in to
-2025-03-19 11:15:59 | ERROR | stderr |     return self._apply(convert)
-2025-03-19 11:15:59 | ERROR | stderr |            ^^^^^^^^^^^^^^^^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 903, in _apply
-2025-03-19 11:15:59 | ERROR | stderr |     module._apply(fn)
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 903, in _apply
-2025-03-19 11:15:59 | ERROR | stderr |     module._apply(fn)
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 930, in _apply
-2025-03-19 11:15:59 | ERROR | stderr |     param_applied = fn(param)
-2025-03-19 11:15:59 | ERROR | stderr |                     ^^^^^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1329, in convert
-2025-03-19 11:15:59 | ERROR | stderr |     return t.to(
-2025-03-19 11:15:59 | ERROR | stderr |            ^^^^^
-2025-03-19 11:15:59 | ERROR | stderr |   File "/Users/zhangguowen/miniforge3/lib/python3.12/site-packages/torch/cuda/__init__.py", line 310, in _lazy_init
-2025-03-19 11:15:59 | ERROR | stderr |     raise AssertionError("Torch not compiled with CUDA enabled")
-2025-03-19 11:15:59 | ERROR | stderr | AssertionError: Torch not compiled with CUDA enabled
