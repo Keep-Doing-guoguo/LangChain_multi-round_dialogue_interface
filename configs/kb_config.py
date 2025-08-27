@@ -1,6 +1,6 @@
 import os
 # 知识库默认存储路径
-KB_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "knowledge_base")
+KB_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "sql_data")
 if not os.path.exists(KB_ROOT_PATH):
     os.mkdir(KB_ROOT_PATH)
 # 数据库默认存储路径。
