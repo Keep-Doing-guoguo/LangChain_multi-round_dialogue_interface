@@ -24,7 +24,7 @@ class SQLiteViewer:
         self.cursor.execute(f"PRAGMA table_info({table_name});")
         return self.cursor.fetchall()
 
-    def get_table_preview(self, table_name: str, limit: int = 10) -> List[Tuple]:
+    def get_table_preview(self, table_name: str, limit: int = 200) -> List[Tuple]:
         self.cursor.execute(f"SELECT * FROM {table_name} LIMIT {limit};")
         return self.cursor.fetchall()
 
@@ -38,8 +38,8 @@ class SQLiteViewer:
 
 
 
-def main():
-    db_path = '/Volumes/PSSD/未命名文件夹/donwload/Bymyself1/knowledge_base/info.db'  # 👈 替换为你的 .db 文件路径
+def main():#  '/Volumes/PSSD/未命名文件夹/donwload/Bymyself1/--LangChain------------------/sql_data/info.db'
+    db_path = '/Volumes/PSSD/未命名文件夹/donwload/Bymyself1/--LangChain------------------/sql_data/info.db'  # 👈 替换为你的 .db 文件路径
     viewer = SQLiteViewer(db_path)
 
     print("📋 所有表：")

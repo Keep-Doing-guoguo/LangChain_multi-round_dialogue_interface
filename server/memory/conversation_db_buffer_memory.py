@@ -5,8 +5,20 @@ from langchain.memory.chat_memory import BaseChatMemory
 from langchain.schema import get_buffer_string, BaseMessage, HumanMessage, AIMessage
 from langchain.schema.language_model import BaseLanguageModel
 from server.db.repository.message_repository import filter_message
+from typing import Any, List, Callable
+from langchain.chat_models import ChatOpenAI
+import os
+os.environ["OPENAI_API_KEY"] = ""
 
-
+# 注意测试的时候，需要将filter_message函数打开，将上面的filter_message导入进行关闭。
+# def filter_message(conversation_id: str, limit: int):
+#     """模拟从数据库读取最近 N 条对话"""
+#     print(f"[DB] 读取 conversation_id={conversation_id} 的最近 {limit} 条消息...")
+#     return [
+#         {"query": "你好", "response": "你好呀！"},
+#         {"query": "今天天气怎么样", "response": "今天晴，气温25度。"},
+#         {"query": "帮我写一首诗", "response": "春风又绿江南岸，明月何时照我还。"}
+#     ]
 class ConversationBufferDBMemory(BaseChatMemory):
     conversation_id: str
     human_prefix: str = "Human"
@@ -70,3 +82,55 @@ class ConversationBufferDBMemory(BaseChatMemory):
     def clear(self) -> None:
         """Nothing to clear, got a memory like a vault."""
         pass
+
+#####测试部分#####
+from typing import Any, List
+from langchain.schema import get_buffer_string, BaseMessage, HumanMessage, AIMessage
+# ====== 封装模型加载函数 ======
+def get_ChatOpenAI(
+        model_name: str,
+        temperature: float,
+        max_tokens: int = None,
+        streaming: bool = True,
+        callbacks: List[Callable] = [],
+        verbose: bool = True,
+        **kwargs: Any,
+) -> ChatOpenAI:
+
+    model = ChatOpenAI(
+        streaming=streaming,
+        verbose=verbose,
+        callbacks=callbacks,
+        openai_api_key='sk-',
+        openai_api_base="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        model_name="qwen-plus",
+        temperature=temperature,
+        max_tokens=max_tokens,
+        **kwargs
+    )
+    return model
+
+
+# ====== main 函数 ======
+def main():
+    model = get_ChatOpenAI(
+        model_name="qwen-plus",
+        temperature=0.7,
+        max_tokens=512,
+        callbacks=[],
+    )
+
+    memory = ConversationBufferDBMemory(conversation_id="test_001", llm=model)
+    messages = memory.buffer
+
+    print("\n=== 对话历史 ===")
+    for msg in messages:
+        role = "🧑 Human" if isinstance(msg, HumanMessage) else "🤖 Assistant"
+        print(f"{role}: {msg.content}")
+
+    print("\n=== 拼接为 prompt ===")
+    print(get_buffer_string(messages))
+
+
+if __name__ == "__main__":
+    main()

@@ -11,7 +11,9 @@ from configs import logger, log_verbose
 from langchain.chat_models import ChatOpenAI
 from langchain.llms import OpenAI, AzureOpenAI, Anthropic
 import os
-os.environ["OPENAI_API_KEY"] = ""
+#sk-
+#sk-
+os.environ["OPENAI_API_KEY"] = "sk-"
 #fn 一个可等待的任务（如协程函数）。用于在任务完成或出错时通知其他任务或流程。
 async def wrap_done(fn: Awaitable, event: asyncio.Event):#并在任务完成或发生异常时，利用 event 发出信号。这种结构对于控制和管理异步任务的状态非常有用。
     """Wrap an awaitable with a event to signal when it's done or an exception is raised."""
@@ -49,13 +51,17 @@ def get_ChatOpenAI(
         verbose=verbose,
         callbacks=callbacks,
         openai_api_key='',
-        openai_api_base="https://dashscope.aliyuncs.com/compatible-mode/v1",
-        model_name="qwen-plus",
+        #https://api.siliconflow.cn/v1
+        #https://dashscope.aliyuncs.com/compatible-mode/v1
+        openai_api_base="https://api.siliconflow.cn/v1",#
+        model_name="deepseek-ai/DeepSeek-V3.1-Terminus",
         temperature=0.7,
         max_tokens=max_tokens,
         **kwargs
     )
     return model
+# ✅ 测试主函数
+
 def get_OpenAI(
 
 ) -> OpenAI:
@@ -64,7 +70,6 @@ def get_OpenAI(
         openai_api_base="https://dashscope.aliyuncs.com/compatible-mode/v1",
         model_name="qwen-plus",
     )
-
     return model
 
 class BaseResponse(BaseModel):
@@ -170,5 +175,23 @@ def get_prompt_template(type: str, name: str) -> Optional[str]:#	•	返回模�
 
 
 
+if __name__ == "__main__":
+    # 1️⃣ 初始化模型
+    model = get_ChatOpenAI(
+        model_name="deepseek-ai/DeepSeek-V3.1-Terminus",
+        temperature=0.7,
+        max_tokens=512,
+        streaming=False,  # 如果要流式输出可以改成 True
+    )
 
+    # 2️⃣ 构造对话
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "请用一句话介绍中国的人工智能发展现状。"}
+    ]
+
+    # 3️⃣ 直接调用 invoke
+    response = model.invoke(messages)
+    print("\n✅ 模型输出内容：")
+    print(response.content)
 
