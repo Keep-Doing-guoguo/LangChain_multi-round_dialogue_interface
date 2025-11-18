@@ -40,10 +40,7 @@ def mount_app_routes(app: FastAPI, run_mode: str = None):
              tags=["Chat"],
              summary="与llm模型对话(通过LLMChain)",
              )(chat)
-    # app.post("/chat/search_engine_chat",
-    #          tags=["Chat"],
-    #          summary="与搜索引擎对话",
-    #          )(search_engine_chat)
+
 
 def run_api(host,port,**kwargs):
     #在这段代码中，ssl_keyfile 和 ssl_certfile 是配置 SSL/TLS 的文件，用于启用 HTTPS（加密的 HTTP）协议。

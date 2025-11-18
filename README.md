@@ -189,6 +189,7 @@
 
 # 7.🚀 快速开始
 ## 7.1. 环境准备
+
 - 需要在configs/model_config.py中配置好大模型的API Key等信息。
 - /server/utils.py文件中的API KEY。
 - 安装必要的环境依赖即可。运行/server/api.py文件即可。
